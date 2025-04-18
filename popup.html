@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arbitrage Betting Calculator</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Arbitrage Betting Calculator</h1>
+    
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="calculator">Ratio Calculator</button>
+      <button class="tab-btn" data-tab="payout">Payout Calculator</button>
+      <button class="tab-btn" data-tab="required">Required Odds</button>
+    </div>
+    
+    <!-- Tab 1: Ratio Calculator -->
+    <div class="tab-content" id="calculator-tab">
+      <div class="input-section">
+        <div class="input-row">
+          <div class="input-group">
+            <label for="team1-ratio">Team 1 Odds Ratio:</label>
+            <input type="number" id="team1-ratio" step="0.01" min="1.01" placeholder="e.g., 2.50">
+          </div>
+          <div class="input-group">
+            <label for="bet-amount">Bet Amount ($):</label>
+            <input type="number" id="bet-amount" step="1" min="1" placeholder="100">
+          </div>
+        </div>
+        <small class="input-help">Enter decimal odds for Team 1 and your desired stake amount</small>
+      </div>
+      
+      <button id="calculate-btn">Calculate</button>
+      
+      <div class="results-section">
+        <h2>Required Odds <span id="bet-amount-display">(for $100 stake on Team 1)</span>:</h2>
+        <p class="results-help">Click on any result to see detailed arbitrage information</p>
+        <table id="results-table">
+          <thead>
+            <tr>
+              <th>Profit Target</th>
+              <th>Team 2 Ratio & Bet</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0% Profit (Arbitrage Break-even)</td>
+              <td id="profit-0">-</td>
+            </tr>
+            <tr>
+              <td>10% Profit</td>
+              <td id="profit-10">-</td>
+            </tr>
+            <tr>
+              <td>25% Profit</td>
+              <td id="profit-25">-</td>
+            </tr>
+            <tr>
+              <td>50% Profit</td>
+              <td id="profit-50">-</td>
+            </tr>
+            <tr>
+              <td>100% Profit</td>
+              <td id="profit-100">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="explanation">
+        <h3>How to use:</h3>
+        <p>Enter the odds for Team 1, then click "Calculate" to see what odds you need for Team 2 to guarantee profits.</p>
+        <div class="calculation-info">
+          <h4>Calculation Details:</h4>
+          <p>This calculator shows you:</p>
+          <ul>
+            <li>The minimum odds needed for Team 2 for different profit targets</li>
+            <li>The exact amount to stake on Team 2 (in parentheses)</li>
+            <li>Click any result for detailed arbitrage information</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tab 2: Payout Calculator -->
+    <div class="tab-content hidden" id="payout-tab">
+      <div class="input-section">
+        <div class="input-row">
+          <div class="input-group">
+            <label for="payout-team1-ratio">Team 1 Odds:</label>
+            <input type="number" id="payout-team1-ratio" step="0.01" min="1.01" placeholder="e.g., 2.50">
+          </div>
+          <div class="input-group">
+            <label for="payout-bet-amount">Bet Amount ($):</label>
+            <input type="number" id="payout-bet-amount" step="1" min="1" placeholder="100">
+          </div>
+        </div>
+        
+        <label for="payout-team2-ratio">Team 2 Odds:</label>
+        <input type="number" id="payout-team2-ratio" step="0.01" min="1.01" placeholder="e.g., 1.75">
+        
+        <small class="input-help">Enter decimal odds for both teams and your stake amount</small>
+      </div>
+      
+      <button id="calculate-payout-btn">Calculate Payout</button>
+      
+      <div class="results-section">
+        <h2>Arbitrage Results <span id="payout-bet-amount-display">(for $100 stake on Team 1)</span>:</h2>
+        <p class="results-help">Based on the odds from both teams</p>
+        
+        <div class="payout-results">
+          <div class="result-card">
+            <h3>Team 2 Stake:</h3>
+            <div class="result-value" id="team2-bet-amount">-</div>
+          </div>
+          
+          <div class="result-card">
+            <h3>Total Investment:</h3>
+            <div class="result-value" id="total-investment">-</div>
+          </div>
+          
+          <div class="result-card">
+            <h3>Potential Profit:</h3>
+            <div class="result-value" id="potential-profit">-</div>
+          </div>
+          
+          <div class="result-card">
+            <h3>Profit Percentage:</h3>
+            <div class="result-value" id="profit-percentage">-</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="explanation">
+        <h3>How to use:</h3>
+        <p>Enter the odds for both teams, then click "Calculate Payout" to see your guaranteed arbitrage profit.</p>
+        <div class="calculation-info">
+          <h4>Calculation Details:</h4>
+          <p>This calculator shows you:</p>
+          <ul>
+            <li>How much to stake on Team 2 for optimal arbitrage</li>
+            <li>Your total investment across both teams</li>
+            <li>Your guaranteed profit regardless of the outcome</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tab 3: Required Odds Calculator -->
+    <div class="tab-content hidden" id="required-tab">
+      <div class="input-section">
+        <div class="input-row">
+          <div class="input-group">
+            <label for="required-team1-ratio">Team 1 Odds:</label>
+            <input type="number" id="required-team1-ratio" step="0.01" min="1.01" placeholder="e.g., 2.50">
+          </div>
+          <div class="input-group">
+            <label for="required-team1-bet">Team 1 Stake ($):</label>
+            <input type="number" id="required-team1-bet" step="1" min="0.01" placeholder="e.g., 100">
+          </div>
+        </div>
+        
+        <div class="input-row">
+          <div class="input-group">
+            <label for="required-team2-bet">Team 2 Stake ($):</label>
+            <input type="number" id="required-team2-bet" step="1" min="0.01" placeholder="e.g., 75">
+          </div>
+          <div class="input-group">
+            <label for="required-team2-ratio">Team 2 Odds:</label>
+            <input type="number" id="required-team2-ratio" step="0.01" min="1.01" placeholder="e.g., 1.75">
+          </div>
+        </div>
+        
+        <small class="input-help">Enter odds and stake amounts for both teams to analyze your potential arbitrage opportunity</small>
+      </div>
+      
+      <button id="calculate-required-btn">Calculate Profit</button>
+      
+      <div class="results-section">
+        <h2>Arbitrage Analysis <span id="required-bet-amount-display">(for your entered stakes)</span>:</h2>
+        <p class="results-help">Based on your current odds and stake amounts</p>
+        
+        <div class="required-results">
+          <div class="result-card large">
+            <h3>Total Investment:</h3>
+            <div class="result-value" id="required-total-investment">-</div>
+          </div>
+          
+          <div class="result-card large">
+            <h3>Potential Profit:</h3>
+            <div class="result-value" id="required-potential-profit">-</div>
+          </div>
+          
+          <div class="result-card large">
+            <h3>Profit Percentage:</h3>
+            <div class="result-value" id="required-profit-percentage">-</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="explanation">
+        <h3>How to use:</h3>
+        <p>This calculator is ideal when you've already placed a bet on Team 1 and want to know if you can arbitrage with Team 2.</p>
+        <div class="calculation-info">
+          <h4>Calculation Details:</h4>
+          <p>Enter your current betting situation:</p>
+          <ul>
+            <li>Team 1 odds (where you've already placed a bet)</li>
+            <li>Team 1 stake (how much you've already wagered)</li>
+            <li>Team 2 stake (how much you're willing to stake)</li>
+            <li>Team 2 odds (the odds currently available)</li>
+          </ul>
+          <p>The calculator will analyze if this creates a profitable arbitrage opportunity.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="tips">
+      <h4>Arbitrage Betting Tips:</h4>
+      <ul>
+        <li>"Not possible" means no arbitrage opportunity exists</li>
+        <li>"Insufficient" means the odds won't achieve your target profit</li>
+        <li>Always account for betting fees when placing real bets</li>
+        <li>Act quickly as odds can change rapidly</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Modal for detailed bet information -->
+  <div class="modal" id="details-modal">
+    <div class="modal-content">
+      <h3 class="modal-title">Detailed Bet Information</h3>
+      
+      <div class="modal-detail">
+        <span class="modal-detail-label">Team 1 Stake:</span>
+        <span class="modal-detail-value" id="modal-team1-bet">$100.00</span>
+      </div>
+      
+      <div class="modal-detail">
+        <span class="modal-detail-label">Team 2 Stake:</span>
+        <span class="modal-detail-value" id="modal-team2-bet">$67.00</span>
+      </div>
+      
+      <div class="modal-detail">
+        <span class="modal-detail-label">Total Investment:</span>
+        <span class="modal-detail-value" id="modal-total-investment">$167.00</span>
+      </div>
+      
+      <div class="modal-detail">
+        <span class="modal-detail-label">Potential Winnings:</span>
+        <span class="modal-detail-value" id="modal-potential-winnings">$200.00</span>
+      </div>
+      
+      <div class="modal-detail">
+        <span class="modal-detail-label">Profit Amount:</span>
+        <span class="modal-detail-value" id="modal-profit-amount">$33.00</span>
+      </div>
+      
+      <div class="modal-detail">
+        <span class="modal-detail-label">Profit Percentage:</span>
+        <span class="modal-detail-value" id="modal-profit-percentage">19.76%</span>
+      </div>
+      
+      <button class="modal-close" id="modal-close-btn">Close</button>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

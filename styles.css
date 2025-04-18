@@ -1,0 +1,412 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.container {
+  width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tab styling */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  margin: 0;
+}
+
+.tab-btn:hover {
+  background-color: #e9e9e9;
+}
+
+.tab-btn.active {
+  background-color: #fff;
+  border-bottom: 2px solid #4CAF50;
+  color: #4CAF50;
+}
+
+.tab-content {
+  display: block;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+h1 {
+  font-size: 20px;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 2px solid #4CAF50;
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-size: 16px;
+  color: #444;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+h4 {
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.input-section {
+  margin-bottom: 15px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 3px solid #4CAF50;
+}
+
+.input-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  flex: 1;
+}
+
+.input-help {
+  display: block;
+  color: #777;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #555;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+input[type="number"]:focus {
+  border-color: #4CAF50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+button#calculate-btn,
+button#calculate-payout-btn,
+button#calculate-required-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+  margin: 10px 0;
+}
+
+button:hover {
+  background-color: #45a049;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.results-section {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.results-help {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+  margin: 5px 0 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+  color: #333;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.explanation {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.explanation p {
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.calculation-info,
+.tips {
+  background-color: #f0f7f0;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.calculation-info {
+  background-color: #f0f5ff;
+  border-left: 3px solid #4a6fd8;
+}
+
+.calculation-info p,
+.tips p {
+  margin: 5px 0;
+}
+
+.calculation-info ul,
+.tips ul {
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.calculation-info li,
+.tips li {
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+
+/* Tooltip styling */
+span[title] {
+  cursor: pointer;
+  border-bottom: 1px dotted #999;
+  position: relative;
+}
+
+span[title]:hover {
+  color: #4CAF50;
+}
+
+/* Modal dialog for detailed information */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 350px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.modal-detail {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-detail-label {
+  font-weight: 600;
+  color: #555;
+}
+
+.modal-detail-value {
+  color: #333;
+}
+
+.modal-detail-value.positive {
+  color: #4CAF50;
+}
+
+.modal-detail-value.negative {
+  color: #f44336;
+}
+
+.modal-close {
+  margin-top: 15px;
+  padding: 8px 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+#bet-amount-display,
+#payout-bet-amount-display {
+  font-weight: normal;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Styling for bet amount display */
+small {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  margin-top: 3px;
+}
+
+/* Payout results styling */
+.payout-results,
+.required-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.result-card.large {
+  grid-column: span 2;
+  margin-bottom: 5px;
+}
+
+.result-card {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.result-card h3 {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: #555;
+}
+
+.result-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.positive {
+  color: #4CAF50;
+}
+
+.negative {
+  color: #f44336;
+}
+
+/* Responsive table for small screens */
+@media (max-width: 400px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+  }
+  
+  td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+  
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+  
+  td:nth-of-type(1):before { content: "Profit Target"; }
+  td:nth-of-type(2):before { content: "Team 2 Ratio & Bet"; }
+}
